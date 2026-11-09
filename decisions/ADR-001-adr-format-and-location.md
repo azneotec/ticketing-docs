@@ -10,10 +10,11 @@ This project exists for learning and for interview preparation. Every significan
 - Decisions are recorded as ADRs with the sections: Status, Date, Context, Decision, Alternatives considered, Consequences (good and bad), Interview one-liner. The template is `ADR-000-template.md`.
 - ADRs live in the `ticketing-docs` repo under `decisions/`, next to the plan, the decision log and the session briefs/handoffs. Later this repo also holds C4 diagrams, runbooks and SLOs.
 - Accepted ADRs are never edited; a change of mind is a new ADR that supersedes the old one.
-- The top-level folder keeps only `AGENTS.md` and `CLAUDE.md`.
+- The top-level folder keeps only `CLAUDE.md` and an `AGENTS.md` symlink into `ticketing-docs` (since session 003).
 
 ## Alternatives considered
-- **Keep docs unversioned in the top-level `docs/` folder** (the state before session 002) — no history, no review as diffs, not published to GitHub.
+- **A. Everything in the `ticketing-docs` repo, versioned** — chosen.
+- **B. Plan and session briefs/handoffs stay in the unversioned top-level folder** (the state before session 002) — rejected: no history and no backup, no review as diffs, not published to GitHub.
 
 ## Consequences
 **Good**
@@ -22,7 +23,7 @@ This project exists for learning and for interview preparation. Every significan
 - The interview one-liner forces each decision to be explainable in a sentence.
 
 **Bad (costs we accept)**
-- `AGENTS.md` / `CLAUDE.md` sit outside any repo, so the agent rules themselves are not versioned.
+- `CLAUDE.md` and the `AGENTS.md` symlink must sit in the top-level folder, outside any repo, because agents start there. Since session 003 the real `AGENTS.md` lives in `ticketing-docs` (versioned) and the top-level file is a relative symlink to it.
 - A decision and the code that implements it land in different repos, so they are separate commits.
 - Superseding instead of editing means more files over time; the index in `decisions/README.md` must stay current.
 

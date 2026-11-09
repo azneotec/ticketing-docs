@@ -12,7 +12,7 @@ The system is made of microservices with a database per service, several fronten
 - Shared build rules live in a Gradle convention plugin repo (`ticketing-build-conventions`).
 
 ## Alternatives considered
-- **Monorepo** (all services in one repo) — not chosen; it would not reproduce the enterprise team structure this project aims to practise.
+- **Monorepo** (all services in one repo) — not chosen. It would be faster for a solo developer, but it hides versioning and contract problems and does not mirror enterprise teams that own and release services independently. Polyrepo was chosen for realism; its costs (below) are accepted deliberately as learning and interview material.
 
 ## Consequences
 **Good**

@@ -10,10 +10,10 @@ The goal of the project is to experience distributed transactions, sagas and dat
 We build an **event ticketing** platform (option C). Scope: purchase, organiser event cancellation and refunds. A flash-sale waiting room is a later learning item, out of scope for now.
 
 ## Alternatives considered
-- **A. Order fulfilment** — not chosen.
-- **B. Travel booking** — not chosen.
+- **A. Order fulfilment** — not chosen: it is the textbook saga example and reads generic in interviews.
+- **B. Travel booking** — not chosen: more participants and more complexity than a beginner-style start needs.
 - **C. Event ticketing** — chosen.
-- **D. Wallet** — not chosen.
+- **D. Wallet** — not chosen: strong for interviews, but too close to Azad's day job (banking), so it offers less new learning.
 
 Ticketing was chosen as a fresh domain whose core problems are naturally distributed: seat holds that expire, contention for the same seat, and idempotency (no double booking or double charge).
 
