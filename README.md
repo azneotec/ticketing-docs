@@ -24,7 +24,7 @@ Later: C4 diagrams, runbooks and SLOs.
 3. Goldfish writes `sessions/NNN-<task>-handoff.md`.
 4. Elephant reviews the handoff and writes the next brief.
 
-Agent rules live in `AGENTS.md` in the top-level folder (outside this repo); `CLAUDE.md` there only imports it.
+Agent rules live in [`AGENTS.md`](AGENTS.md) in this repo. The top-level folder has a relative symlink `AGENTS.md -> ticketing-docs/AGENTS.md` and a `CLAUDE.md` that only imports it (`@AGENTS.md`).
 
 ## Conventions
 
