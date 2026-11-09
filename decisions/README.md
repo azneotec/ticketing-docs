@@ -14,3 +14,5 @@ An ADR records one significant decision: the context, what we chose, what we rej
 | [001](ADR-001-adr-format-and-location.md) | ADR format and location | Accepted | 2026-11-09 |
 | [002](ADR-002-event-ticketing-domain.md) | Event ticketing as the domain | Accepted | 2026-11-09 |
 | [003](ADR-003-repo-per-service.md) | One Git repo per service (polyrepo) | Accepted | 2026-11-09 |
+| [004](ADR-004-strict-hexagonal-archunit.md) | Strict hexagonal architecture, enforced by the build | Accepted | 2026-11-10 |
+| [029](ADR-029-spotless-google-java-format.md) | Formatting enforced by the build (Spotless + google-java-format) | Accepted | 2026-11-10 |
