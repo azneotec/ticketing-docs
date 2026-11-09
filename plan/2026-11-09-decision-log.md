@@ -101,3 +101,17 @@ Other round 5 decisions: Spring Boot has no LTS (use latest stable); Gradle Kotl
 - **Docs home (option A):** `ticketing-docs` repo holds the plan, session briefs/handoffs, ADRs, later C4 and runbooks, so everything is versioned. The top-level folder keeps only `AGENTS.md`/`CLAUDE.md`.
 - **Agent rules:** `AGENTS.md` is the single source; `CLAUDE.md` contains only `@AGENTS.md`, so Claude Code and Codex share one rule set.
 - **GitHub:** repos are pushed to GitHub from session 002 on.
+
+## Round 10 — gaps from session 002 (2026-11-10)
+Reasons the elephant supplied after session 002 found them missing from earlier rounds.
+- **Domain options (round 2):**
+  - **A. Order fulfilment** — rejected: the textbook saga example; it reads generic in interviews.
+  - **B. Travel booking** — rejected: more participants and more complexity than a beginner-style start needs.
+  - **D. Wallet** — rejected: strong for interviews, but too close to Azad's day job (banking), so less new learning.
+  - **C. Event ticketing** — chosen: seat holds with expiry, contention and idempotency make it naturally distributed.
+- **Monorepo rejected (round 4):** polyrepo chosen for realism; it mirrors enterprise teams that own and release services independently. Its costs (contracts repo, platform repo, Pact Broker, multi-PR changes) are accepted deliberately as learning and interview material. A monorepo would be faster solo, but it hides versioning and contract problems.
+- **Docs home (round 9):** **A** everything in `ticketing-docs`, versioned — chosen. **B** plan and session briefs/handoffs stay in an unversioned top-level folder — rejected: no history and no backup.
+- **Shared ArchUnit rules library:** included from session 003 (in `ticketing-build-conventions`).
+- **Formatting:** Spotless + google-java-format, enforced in the build from the first line of code.
+- **GitHub:** commit email verified on the GitHub account; a visible commit email is accepted. All repos are public.
+- **Agent rules versioned:** `AGENTS.md` moves into `ticketing-docs`; the top-level `AGENTS.md` becomes a relative symlink to it, and `CLAUDE.md` still only imports `@AGENTS.md` (session 003).
