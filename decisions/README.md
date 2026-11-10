@@ -15,6 +15,8 @@ An ADR records one significant decision: the context, what we chose, what we rej
 | [002](ADR-002-event-ticketing-domain.md) | Event ticketing as the domain | Accepted | 2026-11-09 |
 | [003](ADR-003-repo-per-service.md) | One Git repo per service (polyrepo) | Accepted | 2026-11-09 |
 | [004](ADR-004-strict-hexagonal-archunit.md) | Strict hexagonal architecture, enforced by the build | Accepted | 2026-11-10 |
+| [005](ADR-005-java-25-features.md) | Java 25 features used deliberately (records, sealed types, pattern matching, virtual threads) | Accepted | 2026-11-10 |
+| [006](ADR-006-jsonb-over-mongodb.md) | Postgres JSONB instead of MongoDB for seat maps | Accepted | 2026-11-10 |
 | [007](ADR-007-observability-day-one.md) | Observability from day one (OpenTelemetry, `grafana/otel-lgtm` locally) | Accepted | 2026-11-10 |
 | [010](ADR-010-rest-edge-grpc-inside.md) | REST at the edge, gRPC inside | Accepted | 2026-11-10 |
 | [016](ADR-016-schema-registry-compatibility.md) | Schema registry and compatibility rules (Apicurio, BACKWARD, build time + runtime) | Accepted | 2026-11-10 |
@@ -22,3 +24,4 @@ An ADR records one significant decision: the context, what we chose, what we rej
 | [028](ADR-028-shared-postgres-database-per-service.md) | One shared Postgres container, one database per service | Accepted | 2026-11-10 |
 | [029](ADR-029-spotless-google-java-format.md) | Formatting enforced by the build (Spotless + google-java-format) | Accepted | 2026-11-10 |
 | [030](ADR-030-avro-events-protobuf-grpc.md) | Avro for events, Protobuf for gRPC | Accepted | 2026-11-10 |
+| [031](ADR-031-spring-data-jpa-separate-entities.md) | Spring Data JPA in the persistence adapter, entities separate from the domain | Accepted | 2026-11-10 |
