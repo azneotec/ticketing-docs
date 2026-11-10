@@ -15,4 +15,7 @@ An ADR records one significant decision: the context, what we chose, what we rej
 | [002](ADR-002-event-ticketing-domain.md) | Event ticketing as the domain | Accepted | 2026-11-09 |
 | [003](ADR-003-repo-per-service.md) | One Git repo per service (polyrepo) | Accepted | 2026-11-09 |
 | [004](ADR-004-strict-hexagonal-archunit.md) | Strict hexagonal architecture, enforced by the build | Accepted | 2026-11-10 |
+| [010](ADR-010-rest-edge-grpc-inside.md) | REST at the edge, gRPC inside | Accepted | 2026-11-10 |
+| [016](ADR-016-schema-registry-compatibility.md) | Schema registry and compatibility rules (Apicurio, BACKWARD, build time + runtime) | Accepted | 2026-11-10 |
 | [029](ADR-029-spotless-google-java-format.md) | Formatting enforced by the build (Spotless + google-java-format) | Accepted | 2026-11-10 |
+| [030](ADR-030-avro-events-protobuf-grpc.md) | Avro for events, Protobuf for gRPC | Accepted | 2026-11-10 |
