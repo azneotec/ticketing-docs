@@ -96,7 +96,7 @@ select … from event where id=?                         -- findById: ONE query,
 - **Bug found by reading the SQL:** at first every event load *also* ran `select … from venue where id=?`. The mapper calls `entity.getVenue().getId()`. The getter was package-private, so Hibernate's proxy class couldn't override it, and the call initialised the proxy. Making `VenueEntity.getId()` public removed the query. The comment in the code and ADR-031 record it.
 
 ## Done by Azad (after the build)
-- [ ] `cd catalogue-service && gh repo create azneotec/catalogue-service --public --source . --push`
+- [x] `cd catalogue-service && gh repo create azneotec/catalogue-service --public --source . --push` (done 2026-11-11; verified: public, `master` at `2118d7c` matches local)
 - [ ] Optional: tag `v0.1.0` once happy (no release was asked for in this brief).
 
 ## Decisions made (and ADRs written)
@@ -159,7 +159,7 @@ Outside the project:
 - Testcontainers containers are removed automatically when the tests finish.
 
 ## Known issues / blockers
-1. **`catalogue-service` isn't on GitHub yet.** Azad runs `gh repo create` (auto mode blocks creating public repos).
+1. ~~**`catalogue-service` isn't on GitHub yet.**~~ Resolved 2026-11-11: Azad created https://github.com/azneotec/catalogue-service and pushed `master`.
 2. Git warns that `gradlew.bat` CRLF will become LF. The other repos behave the same; a `.gitattributes` (`*.bat text eol=crlf`) across all repos would fix it. Suggestion only.
 3. **Domain events are collected but not stored.** `publishEvent` saves the aggregate, and the recorded `EventPublished` is dropped. This is intended until the outbox (Phase 2, ADR-012). The comment in `EventService.publishEvent` marks the spot.
 4. Two lines in `JpaEventRepository.save` aren't covered by tests. They translate a race between our version check and the flush. Hibernate's side of it is proven separately in `OptimisticLockingTest`.
