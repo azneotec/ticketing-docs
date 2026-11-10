@@ -23,7 +23,7 @@ Completed in one session (no 004a/004b split).
   - New failure-script case `generated-code-ignored`. Result: **6 passed, 0 failed**. I also confirmed the generated class is missing from the JaCoCo XML report.
   - Release steps followed. The sample is now on `0.1.2-SNAPSHOT`. A follow-up commit replaced the deprecated `by tasks.registering` in the script.
 
-**Part B — `ticketing-contracts` (new repo, local only, tag `v0.1.0`)**
+**Part B — `ticketing-contracts` (new repo, pushed by Azad, tag `v0.1.0`)**
 - Build setup: Gradle wrapper 9.9.0, `ticketing.java-conventions` 0.1.1 from mavenLocal, version catalog `gradle/libs.versions.toml`, and the same Git-tag versioning as conventions.
 - Versions: protobuf 4.36.2, gRPC 1.85.1, Avro 1.12.2, protobuf Gradle plugin 0.10.1.
 - `proto/ticketing/catalogue/v1/catalogue_service.proto`:
@@ -57,14 +57,8 @@ Completed in one session (no 004a/004b split).
 - Generated Protobuf, gRPC and Avro code compiles under `-Xlint:all -Werror` with **no lint relaxed**, so the risk from the plan didn't happen.
 - ADR-010, ADR-016 and ADR-030 written and indexed.
 
-## Azad: run these to finish
-`gh repo create` is blocked by Claude Code's auto mode (handoff 003), so the contracts repo isn't on GitHub yet:
-```bash
-cd ~/learn/java_workspace/distributed-ticketing/ticketing-contracts
-gh repo create azneotec/ticketing-contracts --public --source . --push
-git push origin v0.1.0
-```
-Check: https://github.com/azneotec/ticketing-contracts shows `master` and tag `v0.1.0`.
+## Done by Azad (after the build)
+- **GitHub:** `gh repo create` is blocked by Claude Code's auto mode (handoff 003), so Azad ran `gh repo create azneotec/ticketing-contracts --public --source . --push` and `git push origin v0.1.0`. Verified: https://github.com/azneotec/ticketing-contracts is public, `master` is in sync, and tag `v0.1.0` is on the remote.
 
 ## Decisions made (and ADRs written)
 - **ADR-010** REST at the edge, gRPC inside. **ADR-016** BACKWARD, Apicurio, build time + runtime. **ADR-030** Avro for events, Protobuf for gRPC. All indexed.
@@ -89,7 +83,7 @@ Check: https://github.com/azneotec/ticketing-contracts shows `master` and tag `v
 - `samples/verify-failure-cases.sh`
 - `samples/hexagonal-sample/gradle.properties` (0.1.1, then 0.1.2-SNAPSHOT)
 
-`ticketing-contracts/` (new repo, local, tag `v0.1.0`):
+`ticketing-contracts/` (new repo, pushed, tag `v0.1.0`):
 - `.editorconfig`, `.gitattributes`, `.gitignore`, `gradle.properties`, `settings.gradle.kts`, `build.gradle.kts`, `README.md`, `buf.yaml`
 - `gradlew`, `gradlew.bat`, `gradle/wrapper/*`, `gradle/version.gradle.kts`, `gradle/libs.versions.toml`
 - `proto/ticketing/catalogue/v1/catalogue_service.proto`, `avro/catalogue/v1/EventPublished.avsc`
@@ -108,11 +102,10 @@ Outside the project:
 ## Known issues / blockers
 1. **Version trap in `version.gradle.kts`** (conventions and contracts): when `HEAD` is exactly on a release tag, the version is the release version **even with uncommitted changes**. In this session, an uncommitted build of conventions overwrote `0.1.0` in `~/.m2`. I restored it by stashing my changes and republishing from the tag (the jar size matches the original). *Suggestion for a future brief:* return `-SNAPSHOT` when the working tree is dirty (`git status --porcelain`). For now it's noted in the contracts README.
 2. **Conventions README "Releasing" step 6** should add: "then `./gradlew publishToMavenLocal`, or the sample can't resolve the new `-SNAPSHOT`". The failure script failed for exactly this reason until I published.
-3. `ticketing-contracts` is not on GitHub until Azad runs the commands above.
-4. mavenLocal is still the only repository (handoff 003, issue 1). Services will need `mavenLocal()` and a local `publishToMavenLocal` of contracts too.
-5. Buf must be installed on every machine, and later in CI. Gradle fails with a clear "install buf" message if it isn't.
-6. Buf and Avro checks run on every build (no declared outputs, because they depend on Git tags). They're fast (~1 s).
-7. The ADR-010 reasons aren't in the decision log yet (see Decisions).
+3. mavenLocal is still the only repository (handoff 003, issue 1). Services will need `mavenLocal()` and a local `publishToMavenLocal` of contracts too.
+4. Buf must be installed on every machine, and later in CI. Gradle fails with a clear "install buf" message if it isn't.
+5. Buf and Avro checks run on every build (no declared outputs, because they depend on Git tags). They're fast (~1 s).
+6. The ADR-010 reasons aren't in the decision log yet (see Decisions).
 
 ## What I learned (for interview prep)
 - **IDL and code generation.** An Interface Definition Language (`.proto`, `.avsc`) describes messages and APIs without depending on any programming language. A compiler (`protoc`, `avro-compiler`) generates Java classes from it, so both sides of a contract use the same types, and changing the contract shows up as a compile error, not a runtime surprise.
