@@ -115,3 +115,14 @@ Reasons the elephant supplied after session 002 found them missing from earlier 
 - **Formatting:** Spotless + google-java-format, enforced in the build from the first line of code.
 - **GitHub:** commit email verified on the GitHub account; a visible commit email is accepted. All repos are public.
 - **Agent rules versioned:** `AGENTS.md` moves into `ticketing-docs`; the top-level `AGENTS.md` becomes a relative symlink to it, and `CLAUDE.md` still only imports `@AGENTS.md` (session 003).
+
+## Round 11 — contracts (2026-11-10, before session 004)
+- **Kafka events in Avro**, chosen over Protobuf and JSON Schema for events, to learn the mature schema-registry ecosystem (Avro is its original and most common format). Schemas are `.avsc` (JSON) files, one namespace per bounded context, e.g. `io.github.azneotec.ticketing.catalogue.v1`.
+- **gRPC contracts in Protobuf**, checked with **Buf** (`buf lint` for style, `buf breaking` against the last release tag for wire/source compatibility).
+- **Avro compatibility checked twice:** at **build time** with Avro's own `SchemaValidator` against the last released schemas (the Avro equivalent of `buf breaking`), and at **runtime** later with a schema registry (Phase 3).
+- **Apicurio Registry over Confluent Schema Registry:** Apicurio is Apache 2.0; Confluent's registry is under the Confluent Community License, which is not open source and restricts some uses. Apicurio speaks a Confluent-compatible API, so the client side stays familiar.
+- **Default compatibility rule: BACKWARD** (consumers using the new schema can read data written with the old one). Consumers are upgraded first and must still read events already sitting in Kafka topics, so this is the rule event consumers need.
+- **Two IDLs** (Protobuf for gRPC, Avro for events) accepted as a deliberate cost; recorded in ADR-030.
+- **`gh repo create` stays a manual step for Azad:** Claude Code's auto mode blocks creating public repos (session 003 finding).
+- **Time zones (session 004):** times are an instant in UTC (`google.protobuf.Timestamp` / Avro `timestamp-millis`) plus an IANA zone id string (e.g. `Europe/London`), so the local wall-clock time of an event can always be rebuilt.
+- **Avro code generation (session 004):** a small Gradle task calling Avro's own `avro-compiler`, because the popular `davidmc24` Avro Gradle plugin is archived.
