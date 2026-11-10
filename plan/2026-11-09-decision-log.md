@@ -133,3 +133,8 @@ Reasons the elephant supplied after session 002 found them missing from earlier 
 - **Kafbat UI** for browsing Kafka locally, under an optional Compose `tools` profile.
 - **One shared Postgres container, one database + login per service** (ADR-028); observability via `grafana/otel-lgtm` (ADR-007).
 - **Versioning fix:** a dirty working tree always builds a `-SNAPSHOT` version, even on a release tag (fixes the trap from handoff 004).
+
+## Round 13 — catalogue-service (2026-11-10, before session 006)
+- **Persistence: Spring Data JPA (Hibernate 7).** Chosen to close Azad's JPA knowledge gaps and for interview relevance (JPA is what most Java teams run). JPA entities live only in the persistence adapter, separate from the domain objects, with explicit mapping code between them (ADR-031).
+- **Admin API is unauthenticated and localhost-only until Phase 2**, when Keycloak arrives (ADR-011). Acceptable because every local port binds to `127.0.0.1`.
+- **Catalogue split into two sessions:** 006 domain + persistence; 007 REST/OpenAPI, admin API, gRPC server, OpenTelemetry and the Phase 1 gate check.
