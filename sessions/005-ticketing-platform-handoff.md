@@ -22,7 +22,7 @@ Completed in one session (no 005a/005b split).
 
   Both are in `~/.m2`. `git push` and tag pushes worked from Claude Code; only `gh repo create` is blocked.
 
-**Part B — `ticketing-platform` (new repo, committed locally, not on GitHub yet)**
+**Part B — `ticketing-platform` (new repo, pushed by Azad)**
 - `compose.yaml` (project `ticketing`, network `ticketing`, named volumes, every port bound to `127.0.0.1`, health checks, `mem_limit` everywhere):
 
   | Service | Image | Profile | Limit | Notes |
@@ -57,6 +57,9 @@ Completed in one session (no 005a/005b split).
 - README covers quick start, ports, how to connect from the host and from containers, secrets, the smoke test, and the brief's concepts.
 - ADR-007, ADR-027 and ADR-028 are written and indexed.
 
+## Done by Azad (after the build)
+- **GitHub:** Azad ran `gh repo create azneotec/ticketing-platform --public --source . --push`. Verified: https://github.com/azneotec/ticketing-platform is public, default branch `master`, and `HEAD` matches `origin/master` (`50bee2b`).
+
 ## Decisions made (and ADRs written)
 - **ADR-007** observability from day one. **ADR-027** constrained hardware. **ADR-028** shared Postgres, one database per service. All indexed.
 - **Image pins:** the newest non-RC release of each image on 2026-11-10. Postgres uses the Alpine variant (smaller image). With Postgres 18 the volume is mounted at `/var/lib/postgresql` (the new data layout).
@@ -86,7 +89,7 @@ Completed in one session (no 005a/005b split).
 - `README.md` (versioning paragraph)
 - `gradle.properties` (conventions 0.1.2)
 
-`ticketing-platform/` (new repo, one commit on `master`, **not pushed yet**):
+`ticketing-platform/` (new repo, one commit on `master`, pushed by Azad):
 - `.editorconfig`, `.gitignore`, `.env.example`, `README.md`, `Makefile`, `compose.yaml`
 - `postgres/initdb/01-service-databases.sh`, `scripts/smoke-test.sh`
 - `.env` (local, git-ignored)
@@ -97,8 +100,7 @@ Outside the project:
 - `~/.m2/repository/io/github/azneotec/ticketing/`: conventions `0.1.2` and `0.1.2-SNAPSHOT` / `0.1.3-SNAPSHOT`, and `ticketing-contracts-{grpc,avro}/0.1.1`
 
 ## Known issues / blockers
-1. **`ticketing-platform` isn't on GitHub yet.** Azad runs, from `ticketing-platform/`:
-   `gh repo create azneotec/ticketing-platform --public --source . --push`
+1. ~~`ticketing-platform` not on GitHub~~: done by Azad (see above).
 2. **Trace by eye** (acceptance): Azad runs `make smoke` and opens the printed Grafana link. The stack was left running after this session; `make down` stops it.
 3. `otel-lgtm` also runs Pyroscope (profiles), which the brief didn't ask for. The image can't turn it off. It fits in the limit, but the container's idle memory will grow with stored data. Watch `make status`.
 4. `make up` uses `--wait`, so if a container never becomes healthy, it fails after the health-check retries. Use `make logs s=<service>`.
