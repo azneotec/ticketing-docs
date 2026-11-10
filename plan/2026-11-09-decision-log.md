@@ -126,3 +126,10 @@ Reasons the elephant supplied after session 002 found them missing from earlier 
 - **`gh repo create` stays a manual step for Azad:** Claude Code's auto mode blocks creating public repos (session 003 finding).
 - **Time zones (session 004):** times are an instant in UTC (`google.protobuf.Timestamp` / Avro `timestamp-millis`) plus an IANA zone id string (e.g. `Europe/London`), so the local wall-clock time of an event can always be rebuilt.
 - **Avro code generation (session 004):** a small Gradle task calling Avro's own `avro-compiler`, because the popular `davidmc24` Avro Gradle plugin is archived.
+
+## Round 12 — platform and follow-ups (2026-11-10, before session 005)
+- **Buf stays on FILE breaking rules.** In a polyrepo, consumers compile against the generated Java, so source-level breaks matter, not only wire breaks. Loosening the rules later (WIRE_JSON) is easy; tightening them later is hard.
+- **ADR-010 reasons confirmed:** REST fits browsers, cookies and the BFF; gRPC gives typed generated clients, efficient binary calls and deadlines between services.
+- **Kafbat UI** for browsing Kafka locally, under an optional Compose `tools` profile.
+- **One shared Postgres container, one database + login per service** (ADR-028); observability via `grafana/otel-lgtm` (ADR-007).
+- **Versioning fix:** a dirty working tree always builds a `-SNAPSHOT` version, even on a release tag (fixes the trap from handoff 004).
