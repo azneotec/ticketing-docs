@@ -114,7 +114,7 @@ select … from event where id=?                         -- findById: ONE query,
   - **`server.port` defaults to 8080** (`PORT` env). Kafbat stays on 8089.
 
 ## Files created or modified
-`ticketing-docs/` (Round 13 commit pushed; the rest is ready to commit):
+`ticketing-docs/` (two commits, both pushed):
 - `plan/2026-11-09-decision-log.md` (Round 13)
 - `plan/2026-11-08-project-plan.md` (ADR backlog: 031)
 - `sessions/006-catalogue-domain-persistence.md` (brief, committed), `sessions/006-catalogue-domain-persistence-handoff.md` (this file)
