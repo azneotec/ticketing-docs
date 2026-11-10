@@ -138,3 +138,11 @@ Reasons the elephant supplied after session 002 found them missing from earlier 
 - **Persistence: Spring Data JPA (Hibernate 7).** Chosen to close Azad's JPA knowledge gaps and for interview relevance (JPA is what most Java teams run). JPA entities live only in the persistence adapter, separate from the domain objects, with explicit mapping code between them (ADR-031).
 - **Admin API is unauthenticated and localhost-only until Phase 2**, when Keycloak arrives (ADR-011). Acceptable because every local port binds to `127.0.0.1`.
 - **Catalogue split into two sessions:** 006 domain + persistence; 007 REST/OpenAPI, admin API, gRPC server, OpenTelemetry and the Phase 1 gate check.
+
+## Round 14 — catalogue API and observability (2026-11-11, before session 007)
+- **REST errors use Problem Details (RFC 9457).** Every `DomainException` subtype, `NotFoundException` and `ConcurrentUpdateException` is mapped to a status by one exhaustive switch, so a new exception type fails the build until it gets a status.
+- **Optimistic locking over HTTP with `ETag` / `If-Match`.** The event's version is its ETag. State-changing admin calls must send `If-Match` (428 if missing); a stale one is rejected.
+- **Admin API `/admin/**` stays unauthenticated until Phase 2 but is enforced localhost-only** by a filter: loopback remote address only, 403 otherwise. Keycloak roles replace it in Phase 2 (ADR-011).
+- **OpenTelemetry through Spring Boot 4's built-in support** (Micrometer Observation, tracing bridge, OTLP export). **No Java agent**: it costs memory the 16 GB budget can't spare (ADR-027).
+- **gRPC server: Spring gRPC if it supports Spring Boot 4.1**, otherwise plain grpc-java managed by a Spring lifecycle bean. Session 007 checks, decides and records.
+- **`catalogue-service` v0.1.0** is released at the end of session 007. The browser half of the Phase 1 gate is session 008 (web shell).
