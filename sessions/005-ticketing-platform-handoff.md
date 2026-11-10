@@ -53,7 +53,7 @@ Completed in one session (no 005a/005b split).
   - with `tools`: ~1.4 GB
   - startup to all healthy: ~20 s (~55 s from empty volumes)
 - Kafbat UI (`make tools`) is healthy and lists `smoke-test` (checked via its API). Topics appear a few seconds after it starts.
-- Trace check: I opened the printed link in a browser. Grafana showed trace `smoke-test / smoke-test-span`, 250 ms. **Azad still has to confirm it by eye**: run `make smoke` and open the link.
+- Trace check: I opened the printed link in a browser. Grafana showed trace `smoke-test / smoke-test-span`, 250 ms. **Azad confirmed it by eye** using the printed link.
 - README covers quick start, ports, how to connect from the host and from containers, secrets, the smoke test, and the brief's concepts.
 - ADR-007, ADR-027 and ADR-028 are written and indexed.
 
@@ -101,7 +101,7 @@ Outside the project:
 
 ## Known issues / blockers
 1. ~~`ticketing-platform` not on GitHub~~: done by Azad (see above).
-2. **Trace by eye** (acceptance): Azad runs `make smoke` and opens the printed Grafana link. The stack was left running after this session; `make down` stops it.
+2. ~~Trace by eye~~: confirmed by Azad in Grafana Tempo. The stack was left running after this session; `make down` stops it.
 3. `otel-lgtm` also runs Pyroscope (profiles), which the brief didn't ask for. The image can't turn it off. It fits in the limit, but the container's idle memory will grow with stored data. Watch `make status`.
 4. `make up` uses `--wait`, so if a container never becomes healthy, it fails after the health-check retries. Use `make logs s=<service>`.
 5. Kafbat's topic list is empty for a few seconds after start, while it loads cluster metadata.
