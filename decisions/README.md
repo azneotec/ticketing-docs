@@ -25,3 +25,6 @@ An ADR records one significant decision: the context, what we chose, what we rej
 | [029](ADR-029-spotless-google-java-format.md) | Formatting enforced by the build (Spotless + google-java-format) | Accepted | 2026-11-10 |
 | [030](ADR-030-avro-events-protobuf-grpc.md) | Avro for events, Protobuf for gRPC | Accepted | 2026-11-10 |
 | [031](ADR-031-spring-data-jpa-separate-entities.md) | Spring Data JPA in the persistence adapter, entities separate from the domain | Accepted | 2026-11-10 |
+| [032](ADR-032-problem-details-and-etag-if-match.md) | REST errors as Problem Details; optimistic locking via ETag / If-Match | Accepted | 2026-11-11 |
+| [033](ADR-033-localhost-only-admin-api.md) | Localhost-only admin API until Phase 2 | Accepted (temporary) | 2026-11-11 |
+| [034](ADR-034-grpc-server-and-opentelemetry-wiring.md) | gRPC server on Spring Boot's built-in support; OpenTelemetry through Micrometer, no agent | Accepted | 2026-11-11 |
