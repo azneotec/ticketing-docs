@@ -32,7 +32,7 @@ Learning rhythm per topic: concept → minimal build → deliberate break → me
 | Observability | Day one: OpenTelemetry, Prometheus, Grafana, Loki, Tempo — locally as the single `grafana/otel-lgtm` image |
 | Testing | Testcontainers, Pact, k6; 80% coverage per service; chaos optional |
 | Infra | Docker Compose (OrbStack) for dev; minikube + Helm, manual deploys, HPA |
-| Repos | One per service; trunk-based `master`; semver; shared Gradle convention plugin |
+| Repos | One per back-end service; front end in one monorepo `ticketing-web` (ADR-037); trunk-based `master`; semver (per-app tags `<app>-vX.Y.Z` in the monorepo); shared Gradle convention plugin |
 | Docs | ADRs, C4 diagrams, runbooks. `ticketing-docs` repo is home for plan, session briefs/handoffs and ADRs (from session 002) |
 | Out of scope | Local backups/DR; waiting room (later); mobile |
 | Blockers | Time-box ~3 h, record, move on |
@@ -51,15 +51,12 @@ Learning rhythm per topic: concept → minimal build → deliberate break → me
 | ticketing-build-conventions | Gradle convention plugin | 1 |
 | ticketing-docs | ADRs, C4, runbooks, SLOs | 1 |
 | catalogue-service | Events, venues, seat maps (Postgres + JSONB) | 1 |
-| web-shell | React host | 1 |
-| web-discover | Browse/search remote | 1–3 |
+| ticketing-web | Front-end monorepo (pnpm workspace, ADR-037): `apps/shell` (React host), `apps/discover` (browse/search remote); later `apps/checkout` (2), `apps/account` (4); `packages/*` (shared config, shell ↔ remote contracts) | 1–4 |
 | inventory-service | Seats, holds, no-overselling (Postgres + Redis) | 2 |
 | booking-service | Booking lifecycle, orchestrator, refunds | 2 |
 | payment-service | Fake payments | 2 |
 | gateway-bff | Gateway + BFF | 2 |
-| web-checkout | Checkout remote | 2 |
 | search-service | Elasticsearch read model via CDC | 3 |
-| web-account | Account remote | 4 |
 | notification-service | Notifications | 4 |
 
 ## Roadmap
@@ -89,4 +86,4 @@ Learning rhythm per topic: concept → minimal build → deliberate break → me
 | Refunds after cancellation | 99% within 24 h; zero lost |
 
 ## ADR backlog
-001 ADR format/location · 002 Ticketing domain · 003 Repo per service · 004 Strict hexagonal + ArchUnit · 005 Java 25 features · 006 JSONB over MongoDB · 007 Observability day one · 008 Inventory/Booking split · 009 Seat-hold design · 010 REST edge, gRPC inside · 011 Gateway + BFF auth · 012 Outbox · 013 Choreography · 014 Hand-built orchestration · 015 Kafka txns vs idempotency · 016 Schema registry · 017 Pact · 018 CDC to Elasticsearch · 019 Module Federation split · 020 Helm/minikube/HPA · 021 OpenBao + ESO · 022 Refund work queue · 023 Temporal vs hand-built · 024 Strategy switching · 025 PII + crypto-shredding · 026 Backup/DR out of scope · 027 Running on constrained hardware (16 GB) · 028 Shared Postgres container, database per service · 029 Formatting enforced by the build (Spotless + google-java-format) · 030 Avro for events, Protobuf for gRPC · 031 Spring Data JPA, entities separate from the domain · 032 REST errors as Problem Details, optimistic locking via ETag/If-Match · 033 Localhost-only admin API until Phase 2 · 034 gRPC server on Spring Boot built-in support, OpenTelemetry via Micrometer (no agent) · 035 Front-end tooling (Rsbuild, Tailwind, TanStack Query, generated OpenAPI types, Vitest/MSW/Playwright) · 036 Browser tracing (W3C trace context end to end, OTLP export path)
+001 ADR format/location · 002 Ticketing domain · 003 Repo per service · 004 Strict hexagonal + ArchUnit · 005 Java 25 features · 006 JSONB over MongoDB · 007 Observability day one · 008 Inventory/Booking split · 009 Seat-hold design · 010 REST edge, gRPC inside · 011 Gateway + BFF auth · 012 Outbox · 013 Choreography · 014 Hand-built orchestration · 015 Kafka txns vs idempotency · 016 Schema registry · 017 Pact · 018 CDC to Elasticsearch · 019 Module Federation split · 020 Helm/minikube/HPA · 021 OpenBao + ESO · 022 Refund work queue · 023 Temporal vs hand-built · 024 Strategy switching · 025 PII + crypto-shredding · 026 Backup/DR out of scope · 027 Running on constrained hardware (16 GB) · 028 Shared Postgres container, database per service · 029 Formatting enforced by the build (Spotless + google-java-format) · 030 Avro for events, Protobuf for gRPC · 031 Spring Data JPA, entities separate from the domain · 032 REST errors as Problem Details, optimistic locking via ETag/If-Match · 033 Localhost-only admin API until Phase 2 · 034 gRPC server on Spring Boot built-in support, OpenTelemetry via Micrometer (no agent) · 035 Front-end tooling (Rsbuild, Tailwind, TanStack Query, generated OpenAPI types, Vitest/MSW/Playwright) · 036 Browser tracing (W3C trace context end to end, OTLP export path) · 037 Front-end monorepo; ADR-003 narrowed to back-end services

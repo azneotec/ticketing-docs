@@ -156,3 +156,18 @@ Reasons the elephant supplied after session 002 found them missing from earlier 
 - **Phase 1 shortcut still applies:** the browser calls catalogue-service directly (CORS) until Gateway/BFF in Phase 2.
 - **Both web repos are public on GitHub; Azad runs `gh repo create`.**
 - **Phase 1 gate, browser half:** one trace browser fetch → catalogue HTTP → use case → SQL in Tempo, then a Phase 1 retro.
+
+## Round 16 — front-end monorepo (2026-11-12, before session 009)
+- **Front end: one monorepo `ticketing-web`** (pnpm workspace: `apps/shell`, `apps/discover`, later `apps/checkout`, `apps/account`; `packages/*`). **Back-end services stay one repo each** (ADR-003 unchanged for them). Decided by Azad, reviewed in planning; recorded in ADR-037.
+- **For:**
+  - Shared singletons (React, React Router, TanStack Query) must move together; in one repo that is one PR, not one per app.
+  - A shared contract package type-checks the shell ↔ remote contract (module names, props), which was only covered by e2e across repos (handoff 008, known issue #2).
+  - One Biome/tsconfig/Vitest config, one lockfile, one CI pipeline later; e2e tests live next to both apps.
+  - Independent deploys remain: Module Federation independence comes from separate builds and runtime loading, not from separate repos.
+- **Against (accepted):**
+  - Breaks the symmetry with the back end.
+  - Risk of build-time imports between apps, which would quietly turn runtime composition into build-time coupling. Mitigated by tooling (boundary check in `pnpm check`).
+  - Tags per app (`shell-v0.1.0`) instead of one version per repo.
+  - A weaker "separate repos, separate teams" lesson on the front end.
+- **Interview framing:** polyrepo where ownership and release cycles differ (services); monorepo where runtime-shared dependencies must move together (front end).
+- **Migration keeps history:** `git filter-repo --to-subdirectory-filter` per repo, merged with `--allow-unrelated-histories`; the unpushed `v0.1.0` tags become `shell-v0.1.0` and `discover-v0.1.0`. Safe because neither repo was ever pushed.

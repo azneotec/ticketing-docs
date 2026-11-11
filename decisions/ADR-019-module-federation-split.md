@@ -2,6 +2,7 @@
 
 - **Status:** Accepted
 - **Date:** 2026-11-12 (decided in planning; built in session 008)
+- **Status note:** Repository layout amended by ADR-037.
 
 ## Context
 The plan calls for a React web front end split like the back end: one team-sized piece per business capability (browse, buy, manage account), each deployable on its own. Part of the goal is learning what micro-frontends really cost, not only what they promise. We need a split, a way to compose the pieces in the browser, and a rule for what is shared and what happens when a piece fails.

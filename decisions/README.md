@@ -13,7 +13,7 @@ An ADR records one significant decision: the context, what we chose, what we rej
 |---|---|---|---|
 | [001](ADR-001-adr-format-and-location.md) | ADR format and location | Accepted | 2026-11-09 |
 | [002](ADR-002-event-ticketing-domain.md) | Event ticketing as the domain | Accepted | 2026-11-09 |
-| [003](ADR-003-repo-per-service.md) | One Git repo per service (polyrepo) | Accepted | 2026-11-09 |
+| [003](ADR-003-repo-per-service.md) | One Git repo per service (polyrepo) | Accepted (partially superseded by 037) | 2026-11-09 |
 | [004](ADR-004-strict-hexagonal-archunit.md) | Strict hexagonal architecture, enforced by the build | Accepted | 2026-11-10 |
 | [005](ADR-005-java-25-features.md) | Java 25 features used deliberately (records, sealed types, pattern matching, virtual threads) | Accepted | 2026-11-10 |
 | [006](ADR-006-jsonb-over-mongodb.md) | Postgres JSONB instead of MongoDB for seat maps | Accepted | 2026-11-10 |
@@ -31,3 +31,4 @@ An ADR records one significant decision: the context, what we chose, what we rej
 | [034](ADR-034-grpc-server-and-opentelemetry-wiring.md) | gRPC server on Spring Boot's built-in support; OpenTelemetry through Micrometer, no agent | Accepted | 2026-11-11 |
 | [035](ADR-035-frontend-tooling.md) | Front-end tooling: Rsbuild, Tailwind, TanStack Query, generated API types, Vitest/MSW/Playwright | Accepted | 2026-11-12 |
 | [036](ADR-036-browser-tracing.md) | Browser tracing with W3C trace context, exported through a same-origin OTLP route | Accepted | 2026-11-12 |
+| [037](ADR-037-frontend-monorepo.md) | Front-end monorepo; ADR-003 narrowed to back-end services | Accepted | 2026-11-12 |

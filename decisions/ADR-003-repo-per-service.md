@@ -2,6 +2,7 @@
 
 - **Status:** Accepted
 - **Date:** 2026-11-09 (decided in planning round 4)
+- **Status note:** Partially superseded by ADR-037 for front-end apps.
 
 ## Context
 The system is made of microservices with a database per service, several frontends and shared contracts. The project should be structured the way an enterprise team works, so that the problems of independent services (versioning, contracts, coordinated changes) are experienced, not avoided.
