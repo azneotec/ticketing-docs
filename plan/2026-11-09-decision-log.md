@@ -146,3 +146,13 @@ Reasons the elephant supplied after session 002 found them missing from earlier 
 - **OpenTelemetry through Spring Boot 4's built-in support** (Micrometer Observation, tracing bridge, OTLP export). **No Java agent**: it costs memory the 16 GB budget can't spare (ADR-027).
 - **gRPC server: Spring gRPC if it supports Spring Boot 4.1**, otherwise plain grpc-java managed by a Spring lifecycle bean. Session 007 checks, decides and records.
 - **`catalogue-service` v0.1.0** is released at the end of session 007. The browser half of the Phase 1 gate is session 008 (web shell).
+
+## Round 15 — web shell and Discover remote (2026-11-12, before session 008)
+- **Bundler: Rsbuild (Rspack) with Module Federation 2.0** (`@module-federation/rsbuild-plugin`). Rspack is a Rust port of webpack with the same plugin model, so Module Federation is first-class. Vite's federation support is a community plugin.
+- **Styling: Tailwind CSS**, built per app. No global style leakage between remotes (the remote's classes are prefixed).
+- **TypeScript (strict), pnpm, React (current stable), React Router, TanStack Query.**
+- **API types are generated from `catalogue-service/docs/openapi.yaml`** with `openapi-typescript` (and `openapi-fetch`). The committed spec is the contract, so no hand-written DTOs.
+- **Tests: Vitest + Testing Library with an 80% coverage gate, MSW for API mocks, one Playwright e2e.**
+- **Phase 1 shortcut still applies:** the browser calls catalogue-service directly (CORS) until Gateway/BFF in Phase 2.
+- **Both web repos are public on GitHub; Azad runs `gh repo create`.**
+- **Phase 1 gate, browser half:** one trace browser fetch → catalogue HTTP → use case → SQL in Tempo, then a Phase 1 retro.
