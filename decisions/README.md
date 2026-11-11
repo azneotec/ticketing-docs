@@ -20,6 +20,7 @@ An ADR records one significant decision: the context, what we chose, what we rej
 | [007](ADR-007-observability-day-one.md) | Observability from day one (OpenTelemetry, `grafana/otel-lgtm` locally) | Accepted | 2026-11-10 |
 | [010](ADR-010-rest-edge-grpc-inside.md) | REST at the edge, gRPC inside | Accepted | 2026-11-10 |
 | [016](ADR-016-schema-registry-compatibility.md) | Schema registry and compatibility rules (Apicurio, BACKWARD, build time + runtime) | Accepted | 2026-11-10 |
+| [019](ADR-019-module-federation-split.md) | Micro-frontends with Module Federation: shell + Discover, Checkout, Account | Accepted | 2026-11-12 |
 | [027](ADR-027-constrained-hardware.md) | Running a distributed system on constrained hardware (16 GB laptop) | Accepted | 2026-11-10 |
 | [028](ADR-028-shared-postgres-database-per-service.md) | One shared Postgres container, one database per service | Accepted | 2026-11-10 |
 | [029](ADR-029-spotless-google-java-format.md) | Formatting enforced by the build (Spotless + google-java-format) | Accepted | 2026-11-10 |
@@ -28,3 +29,5 @@ An ADR records one significant decision: the context, what we chose, what we rej
 | [032](ADR-032-problem-details-and-etag-if-match.md) | REST errors as Problem Details; optimistic locking via ETag / If-Match | Accepted | 2026-11-11 |
 | [033](ADR-033-localhost-only-admin-api.md) | Localhost-only admin API until Phase 2 | Accepted (temporary) | 2026-11-11 |
 | [034](ADR-034-grpc-server-and-opentelemetry-wiring.md) | gRPC server on Spring Boot's built-in support; OpenTelemetry through Micrometer, no agent | Accepted | 2026-11-11 |
+| [035](ADR-035-frontend-tooling.md) | Front-end tooling: Rsbuild, Tailwind, TanStack Query, generated API types, Vitest/MSW/Playwright | Accepted | 2026-11-12 |
+| [036](ADR-036-browser-tracing.md) | Browser tracing with W3C trace context, exported through a same-origin OTLP route | Accepted | 2026-11-12 |
