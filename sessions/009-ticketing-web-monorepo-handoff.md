@@ -102,7 +102,7 @@ Outside the repos:
 - New traces in the `otel-lgtm` volume.
 
 ## Known issues / blockers
-1. **`ticketing-web` isn't on GitHub yet.** Azad runs the commands above. Nothing else needs pushing except `ticketing-docs`.
+1. ~~`ticketing-web` isn't on GitHub yet.~~ **Pushed by Azad (2026-11-12):** `azneotec/ticketing-web` `master`, tags `shell-v0.1.0` and `discover-v0.1.0`; `ticketing-docs` pushed too.
 2. My own mistake, fixed: while breaking the contract on purpose, `git checkout` on an uncommitted file also undid my contract edit in Discover's `rsbuild.config.ts`. I re-applied it before committing, and the full check passed. Lesson: commit before deliberate breaks.
 3. The contract is checked at compile time only. A Discover **deployed** from an older commit can still disagree with a newer shell at runtime. Release order (remote first for breaking changes) is in the root README, not enforced.
 4. `dist/` folders and `node_modules` exist locally in `ticketing-web` (git-ignored).
